@@ -491,9 +491,13 @@ plusieurs lignes.";
             int resultat = MesMethodes.Somme(10, 20);
             Console.WriteLine(resultat);
 
-            
+            int[] tableau = { 10, 2, 15, 15, 1, 9, 55 };
 
-            
+            Console.WriteLine($"Somme tableau: {MesMethodes.SommeTableau(tableau)}");
+            Console.WriteLine($"Moyenne tableau: {MesMethodes.MoyenneTableau(tableau)}");
+            Console.WriteLine($"Min tableau: {MesMethodes.MinimumTableau(tableau)}");
+
+
 
 
             #endregion

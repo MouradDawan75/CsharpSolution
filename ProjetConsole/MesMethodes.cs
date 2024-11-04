@@ -57,7 +57,39 @@ namespace ProjetConsole
         }
 
         //Méthode qui renvoie la somme des éléments d'un tableau d'entiers
+
+        public static int SommeTableau(int[] tab)
+        {
+            int s = 0;
+            foreach (int x in tab)
+            {
+                s += x; // s = s + x
+            }
+            return s;
+        }
+
         //Méthode qui renvoie la moyenne des éléments d'un tableau d'entiers
+
+        public static double MoyenneTableau(int[] tab)
+        {
+            double s = SommeTableau(tab);
+            int nbElements = tab.Length;
+            return s / nbElements;  
+        }
+
         //Méthode qui renvoie l'élément le plus petit d'un tableau d'entiers
+
+        public static int MinimumTableau(int[] tab)
+        {
+            int min = int.MaxValue;
+            foreach (int x in tab)
+            {
+                if (x < min)
+                {
+                    min = x;
+                }
+            }
+            return min;
+        }
     }
 }
