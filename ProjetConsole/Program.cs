@@ -775,7 +775,14 @@ _ Afficher le salaire moyen des employés: tapez 3
 
                 }
             }
-
+            /*
+             * Dans l'approche objets:
+             * - 2 types de classes: Objet - Sevice (utilitaire)
+             * - 2 types de méthodes : d'instance - de classe (static)
+             * - 2 types variables: locales (définies dans une méthode) qui doivent être initialisées 
+             *    et globales (de classe) qui possèdent des valeurs par défaut (pas besoin de les initialiser)
+             * 
+             */
            
 
 
