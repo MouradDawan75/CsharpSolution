@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjetConsole
 {
+    //Classe service (classe utilitaire)
     public class MesMethodes
     {
        // Syntaxe:
@@ -90,6 +91,71 @@ namespace ProjetConsole
                 }
             }
             return min;
+        }
+
+        //Méthode avec des paramètres optionnels:
+        /*
+         * Possèdent une valeur initiale et sont définis après les params obligatoires
+         */
+
+        public static void MethodeOptionnelle(int x , int alpha = 10, int beta = 15)
+        {
+            Console.WriteLine($"x = {x} - apha = {alpha} - beta = {beta}");
+        }
+
+        public static double PrixTTC(double prixHT, double tva = 0.2)
+        {
+            return prixHT * (1 + tva);
+        }
+        //Passage de paramètres par réference: concerne uniquement les types simples, car les types complèxes par définition
+        // sont des types réference
+        public static void Permuter(ref int v1, ref int v2)
+        {
+            int tmp = v1;
+            v1 = v2;
+            v2 = tmp;
+        }
+
+        //Paramètres en sortie d'une méthode:
+
+        public static double Calculs(double x, double y, out double produit, out double moyenne)
+        {
+            produit = x * y;
+            moyenne = (x + y) / 2;
+            return x + y;
+        }
+
+
+        //Méthode avec un nombre variable de paramètres: permet d'éviter de définir les différentes surcharges possibles d'une méthode
+      /*  public static int Produit(int x, int y)
+        {
+            return x * y;
+        }
+
+        public static int Produit(int x, int y, int z)
+        {
+            return x * y * z;
+        }
+
+        public static int Produit(int x, int y, int z, int v)
+        {
+            return x * y * z * v;
+        }*/
+
+        //params: il s'agit d'un tableau à taille variable
+        public static int Produit(params int[] tab)
+        {
+            int p = 1;
+            foreach (var item in tab)
+            {
+                p *= item;
+            }
+            return p;
+        }
+
+        public static void Test(string nom, params string[] chaines)
+        {
+
         }
     }
 }

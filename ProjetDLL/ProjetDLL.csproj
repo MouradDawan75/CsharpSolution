@@ -41,8 +41,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConceptsObjets\Abstraction\Femme.cs" />
+    <Compile Include="ConceptsObjets\Abstraction\Homme.cs" />
+    <Compile Include="ConceptsObjets\Abstraction\Humain.cs" />
+    <Compile Include="ConceptsObjets\Association\Adresse.cs" />
+    <Compile Include="ConceptsObjets\Association\Client.cs" />
+    <Compile Include="ConceptsObjets\Encapsulation\CompteBancaire.cs" />
+    <Compile Include="ConceptsObjets\Encapsulation\Rectangle.cs" />
+    <Compile Include="ConceptsObjets\Heritage\Animal.cs" />
+    <Compile Include="ConceptsObjets\Heritage\Chat.cs" />
+    <Compile Include="ConceptsObjets\Heritage\Chien.cs" />
+    <Compile Include="ConceptsObjets\Heritage\Giraffe.cs" />
+    <Compile Include="ConceptsObjets\TP\Commercial.cs" />
+    <Compile Include="ConceptsObjets\TP\Employe.cs" />
+    <Compile Include="ConceptsObjets\TP\ManutARisque.cs" />
+    <Compile Include="ConceptsObjets\TP\Manutentionnaire.cs" />
+    <Compile Include="ConceptsObjets\TP\Personnel.cs" />
+    <Compile Include="ConceptsObjets\TP\Representant.cs" />
+    <Compile Include="ConceptsObjets\TP\TechARisque.cs" />
+    <Compile Include="ConceptsObjets\TP\Technicien.cs" />
+    <Compile Include="ConceptsObjets\TP\Vendeur.cs" />
+    <Compile Include="optimisation\A.cs" />
+    <Compile Include="optimisation\B.cs" />
+    <Compile Include="optimisation\C.cs" />
+    <Compile Include="optimisation\D.cs" />
+    <Compile Include="optimisation\MyClasse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tools.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
