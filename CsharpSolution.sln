@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TP_Calculatrice", "TP_Calcu
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "VbProjetDLL", "VbProjetDLL\VbProjetDLL.vbproj", "{05380B7E-DA7E-4400-AF4F-309B8FBFEB9F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TP_Nombre_Aleatoire", "TP_Nombre_Aleatoire\TP_Nombre_Aleatoire.csproj", "{21B131FE-E0A0-4BEA-A2CE-D04A83D4DCB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo_Debug", "Demo_Debug\Demo_Debug.csproj", "{4E500A45-112A-4380-BC0D-077286689BCF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{05380B7E-DA7E-4400-AF4F-309B8FBFEB9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05380B7E-DA7E-4400-AF4F-309B8FBFEB9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05380B7E-DA7E-4400-AF4F-309B8FBFEB9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21B131FE-E0A0-4BEA-A2CE-D04A83D4DCB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21B131FE-E0A0-4BEA-A2CE-D04A83D4DCB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21B131FE-E0A0-4BEA-A2CE-D04A83D4DCB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21B131FE-E0A0-4BEA-A2CE-D04A83D4DCB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E500A45-112A-4380-BC0D-077286689BCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E500A45-112A-4380-BC0D-077286689BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E500A45-112A-4380-BC0D-077286689BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E500A45-112A-4380-BC0D-077286689BCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

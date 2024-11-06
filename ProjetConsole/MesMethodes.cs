@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjetDLL.ConceptsObjets.Heritage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -153,9 +154,51 @@ namespace ProjetConsole
             return p;
         }
 
-        public static void Test(string nom, params string[] chaines)
-        {
+        // méthode qui renvoie le nombre de mots dans une chaine
 
+        public static int NombreMots(string chaine)
+        {
+            return chaine.Trim().Replace("  ", " ").Split(',', ';', ' ', '.', ':', '!', '?').Length;
+        }
+
+        // méthode qui renvoie le nombre d'occurrences d'un mot dans un paragraphe
+
+        public static int NombreOccurrences(string mot, string paragraphe)
+        {
+            string[] words = paragraphe.Trim().Replace("  ", " ").Split(',', ';', ' ', '.', ':', '!', '?');
+            int nb = 0;
+            foreach (var word in words)
+            {
+                if (word.ToLower().Equals(mot.ToLower()))
+                {
+                    nb++;
+                }
+            }
+
+            return nb;
+        }
+
+        // méthode qui renvoie la chaine inversée
+
+        public static string InverserChaine(string chaine)
+        {
+            //return chaine.Reverse().ToString();
+            string chaineInversee = "";
+
+            for (int i = chaine.Length - 1; i >= 0; i--)
+            {
+                chaineInversee += chaine[i];
+            }
+
+            return chaineInversee;
+        }
+
+        // méthode qui permet de vérifier si une chaine est un palindrôme: sms, sos....
+
+        public static bool VerifPalindrome(string chaine)
+        {
+            chaine = chaine.ToUpper();
+            return chaine.Equals(InverserChaine(chaine));
         }
     }
 }

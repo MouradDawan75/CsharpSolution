@@ -6,7 +6,9 @@ using ProjetDLL.ConceptsObjets.Heritage;
 using ProjetDLL.ConceptsObjets.TP;
 using ProjetDLL.optimisation;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -546,7 +548,7 @@ plusieurs lignes.";
 
             #endregion
 
-            #region "Classes"
+            #region "Classes et concepts objets"
 
             Console.WriteLine(">>>>>>>>>>>>>>>> Classes:");
             /*
@@ -683,7 +685,7 @@ plusieurs lignes.";
 
             Console.WriteLine(">>>> Abstraction:");
 
-            //Une classe abstraite est une classe non instanciable
+            //Une classe abstraite est une classe non instanciable: pour l'instancier, on doit utiliser une de ses classes filles
 
             Homme h = new Homme();
             Femme f = new Femme();
@@ -783,12 +785,462 @@ _ Afficher le salaire moyen des employés: tapez 3
              *    et globales (de classe) qui possèdent des valeurs par défaut (pas besoin de les initialiser)
              * 
              */
-           
+
 
 
 
             #endregion
 
+            #region "Exceptions"
+
+            /*
+             * Il existe 3 types d'erreurs possibles dans un code:
+             * - Erreurs de compilation (syntaxe): elles sont détetctées automatiquement par l'IDE
+             * - Exception: est une erreur qui provoque l'arrêt de l'application
+             * - Code fonctionnel qui renvoie un résultat inattendu (faire du debuggage)
+             * 
+             * Pour éviter l'arrêt de l'application, on doit gérer l'exception.
+             * Pour gérer une exception, on utilise le bloc try/catch
+             * Il existe plusieurs types d'exceptions, chacune d'elle porte le nom de l'erreur qu'elle génère.
+             * Il existe aussi un type générique qui est le type Exception
+             * 
+             */
+
+            Console.WriteLine(">>>>>>> Exceptions:");
+            int value = 10;
+            int[] myTab = { 10, 20 };
+            
+
+            try
+            {
+                Console.WriteLine(myTab[2]);
+                Console.WriteLine(value / 0);
+                
+            }
+            catch (DivideByZeroException e)
+            {
+                Console.WriteLine("Exception gérée.....");
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
+
+            // Dans la pratique:
+            /*
+             * On utilise soit un catch pour chaque type d'exception possibe
+             * soit le type générique
+             */
+            Console.WriteLine(">>> Type générique:");
+
+            // Obligation: une ressource (fichier, base de données.....) doit libérée à la fin de son utilisation
+
+            try
+            {
+                //Ouverture d'un fichier en lecture
+                Console.WriteLine(myTab[2]);
+                Console.WriteLine(value / 0);
+                
+
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception générique.....");
+
+            }
+            finally
+            {
+                //bloc optionnel qui s'exécute tout le temps, exception ou pas
+                //Dans la pratique, ce bloc sert à libérer les ressources utilisées dans le try
+                //Fermeture du fichier
+            }
+
+            try
+            {
+                Division(0);
+            }
+            catch (Exception ex)
+            {
+                //Choisir un traitement à exécuter
+            }
+            
+
+            Console.WriteLine("suite de l'application........");
+
+            CompteBancaire compte = new CompteBancaire("dre2222", 1500);
+            Console.WriteLine(compte.Solde);
+
+            //Tant que le nombre saisi n'est pas valide, la suite du code n'est pas exécutée
+
+            while (true)
+            {
+                Console.WriteLine("Votre nombre: ");
+                int myNumber = 0;
+                try
+                {
+                    myNumber = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Nombre saisi: "+myNumber);
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Nombre invalide.....");
+                }
+                
+                
+            }
+
+
+
+
+            #endregion
+
+            #region "Classe String"
+
+            Console.WriteLine(">>>>>>>>>>>>> Classe String:");
+
+            string st = "test"; //On a la possibilité de créer des objets de type string sans faire appel au constructeur
+            st = st.ToUpper(); //les objets de type string sont immuables
+
+            Console.WriteLine(st);
+
+            //Quelques méthode de la classe string
+
+            string texte = " ceci est une chaine ";
+
+            Console.WriteLine("Suppression des éspaces de début et de fin de chaine: "+texte.Trim());
+            Console.WriteLine("texte commence par ceci ? " + texte.StartsWith("ceci")); //false
+            Console.WriteLine("texte se termine par chaine ? "+texte.EndsWith("chaine ")); //true
+            Console.WriteLine("Taille du texte: "+texte.Length); //21 éspaces compris - un objet de type string est un tableau de caractères
+            Console.WriteLine("2ème char dans texte: " + texte[1]);
+            Console.WriteLine("2ème char dans texte: " + texte.ElementAt(1));
+            Console.WriteLine("texte contient le mot ceci ? "+texte.Contains("ceci"));
+            Console.WriteLine("Rempacer une chaine par un paragraphe: "+texte.Replace("une chaine", "un paragarphe"));
+
+            //Extraction de sous chaines:
+
+            Console.WriteLine("Sous chaine1: "+texte.Substring(1));
+            Console.WriteLine("Sous chaine2 avec taille spécifiée: "+texte.Substring(1, 8));
+
+            //Split: découpage d'une chaine
+
+            string mots = "mot1,mot2 mot3:mot4.mot5";
+            string[] tabMots = mots.Split(',', ' ', '.', ':');
+
+            foreach (var mt in tabMots)
+            {
+                Console.WriteLine(mt);
+            }
+
+            //Join: permet de construire une chaine
+            Console.WriteLine( string.Join(" ", "il", "est", 10, ":", 06));
+
+            //Dans la classe MesMethodes: ajoutez ces méthodes:
+            /*
+             * méthode qui renvoie le nombre de mots dans une chaine
+             * méthode qui renvoie le nombre d'occurrences d'un mot dans un paragraphe
+             * méthode qui renvoie la chaine inversée
+             * méthode qui permet de vérifier si une chaine est un palindrôme: sms, sos....
+             * 
+             */
+
+
+            #endregion
+
+            #region "Dates"
+
+
+            Console.WriteLine(">>>>>>>>>>>> Dates");
+
+            //Créer des objets de types date:
+            DateTime dt1 = DateTime.Now;
+            Console.WriteLine("DateTime.Now: "+dt1);
+
+            DateTime dt2 = DateTime.Today;
+            Console.WriteLine("DateTime.Today: " + dt2);
+
+            DateTime dt3 = new DateTime(2012, 5, 25, 14, 35, 46);
+            Console.WriteLine("new DateTime(): " + dt3);
+
+            //Comparaison de dates:
+
+            Console.WriteLine("Comparaison de dt1 et dt2: "+dt1.CompareTo(dt2)); //renvoie 1 
+            Console.WriteLine("Comparaison de dt2 et dt1: "+dt2.CompareTo(dt1)); //renvoie -1 
+
+            Console.WriteLine("dt1 égale à dt2: "+dt1.Equals(dt2));
+
+            Console.WriteLine("dt1 plus 2 jours et demi: "+dt1.AddDays(2.5));
+
+            Console.WriteLine("Date longue: "+dt1.ToLongDateString());
+            Console.WriteLine("Date courte: "+dt1.ToShortDateString());
+            Console.WriteLine("Heure longue: "+dt1.ToLongTimeString());
+            Console.WriteLine("Heure courte: "+dt1.ToShortTimeString());
+
+
+            #endregion
+
+            #region "Collections"
+
+            Console.WriteLine(">>>>>>>>>>>>> Collections:");
+            /* Les objets de types collections sont des tableaux dynamiques.
+             * 2 types de collections:
+             * - collection de type Array (tableau): arraylist,list,stack,queue
+             * - collection de type mapping: fonctionne par association clé:valeur -> dictionary
+             * 
+             */
+
+            //Collection faiblement typée
+
+            Console.WriteLine("** ArrayList: collection faibement typée:");
+
+            ArrayList arrayList = new ArrayList();
+            
+            //Ajouts: add - insert
+            arrayList.Add(10);
+            arrayList.Add("test");
+            arrayList.Add(true);
+
+            Console.WriteLine("Taille de arrayList: "+arrayList.Count); //3
+            Console.WriteLine("arrayList contient 10 ? "+arrayList.Contains(10));
+
+            int index2 = arrayList.IndexOf("test"); //1
+
+            arrayList.Insert(index2, "Lyon");
+
+            //Modifications:
+            arrayList[0] = 99;
+
+            //Suppressions:
+
+            arrayList.Remove("test");
+
+            Console.WriteLine("arrayList contient test ? "+arrayList.Contains("test"));
+
+            //Parcourir ArrayList:
+
+            //foreach
+
+            foreach (object item in arrayList)
+            {
+                Console.WriteLine(item);
+            }
+
+            //for
+
+            for (int ind = 0; ind < arrayList.Count; ind++)
+            {
+                Console.WriteLine(arrayList[ind]);
+            }
+
+            //while
+
+            int cte = 0;
+            while (cte < arrayList.Count)
+            {
+                Console.WriteLine(arrayList[cte]);
+                cte++;
+            }
+
+            Console.WriteLine("** List: collection fortement typée:");
+
+            List<string> myList = new List<string>();
+
+            //Ajouts: add - insert
+            myList.Add("test");
+            myList.Add("test1");
+            myList.Add("test2");
+
+            myList.Insert(1, "Lyon");
+
+            //Modifications:
+            myList[0] = "test5";
+
+            //Suppressions:
+            myList.Remove("test1");
+
+            foreach (string item in myList)
+            {
+                Console.WriteLine(item);
+            }
+
+            Console.WriteLine("** stack: un stockage LIFO");
+            //stack: pile LIFO: Last In First Out
+
+            Stack<string> pile = new Stack<string>();
+
+            Console.WriteLine("Taille de la pile: "+pile.Count);
+
+            //Ajouts:
+            pile.Push("test");
+            pile.Push("test1");
+            pile.Push("test2");
+
+            Console.WriteLine("Pile contient test2 ?"+pile.Contains("test2")); //true
+
+            pile.Pop();
+
+            Console.WriteLine("Pile contient test2 après Pop ?" + pile.Contains("test2")); //false
+
+            Console.WriteLine("Prochain élément à supprimer: "+pile.Peek()); //test1
+
+
+            Console.WriteLine("** queue: un stockage FIFO");
+            //queue: FIFO: First In First Out
+
+            Queue<string> queue = new Queue<string>();
+
+            queue.Enqueue("test");
+            queue.Enqueue("test1");
+            queue.Enqueue("test2");
+
+            Console.WriteLine("queue contient test ? "+queue.Contains("test")); //true
+
+            queue.Dequeue(); //supprime le 1er élément
+
+            Console.WriteLine("queue contient test après appel de dequeue  ? " + queue.Contains("test")); //false
+            Console.WriteLine("Prochain élément à supprimer: "+queue.Peek());
+
+            Console.WriteLine(">>>>>>> Dictionnaire:");
+            //Stockage de type clé:valeur
+            /*
+             * Dans un dictionnaire physique, le mot est la clé, sa définition est la valeur.
+             * Dans un dictionnaire les clés sont uniques.
+             * Stockage pratique:
+             * - pour la gestion des paramètres de configutation
+             * - pour classes des objets par catégorie
+             * - pour regrouper les caractéristiques d'un objet
+             */
+
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+
+            dict.Add("user", "admin");
+            dict.Add("password", "@@dsqdsqd!!");
+
+            Dictionary<string, object> userDict = new Dictionary<string, object>();
+            userDict.Add("nom", "DUPONT");
+            userDict.Add("prenom", "Marc");
+            userDict.Add("age", 60);
+            Console.WriteLine(userDict["nom"]);
+
+            if (userDict.ContainsKey("age"))
+            {
+                Console.WriteLine(userDict["age"]);
+            }
+
+            //Parcourir un dict:
+
+            Console.WriteLine("Parcourir les clés:");
+
+            foreach (var cle in userDict.Keys)
+            {
+                Console.WriteLine($"Clé: {cle} - Valeur: {userDict[cle]}");
+            }
+
+            Console.WriteLine("Parcourir les valeurs:");
+
+            foreach (var valeur in userDict.Values)
+            {
+                Console.WriteLine($"Valeur: {valeur}");
+            }
+
+            #endregion
+
+            #region "Fichiers"
+
+            Console.WriteLine(">>>>>>>>>>>>>>> Fichiers:");
+            /*
+             * .net fournit un certain nombre de classes qui permettent de manipuler les fichiers et les répertoires.
+             * Directory: contient que des méthodes statiques
+             * File et FileInfo: ces 2 classes proposent pratiquement les mm méthodes, elles sont statiques dans File et d'instances 
+             * dans FileInfo
+             * Pour les opérations de lecture/écriture: StreamReader et StreamWriter
+             * 
+             * 
+             */
+
+            //Classe Directory:
+
+            Console.WriteLine("************ Classe Directory:");
+
+            Directory.CreateDirectory("rep1"); //chemin relatif
+            Directory.CreateDirectory(@"c:\monRep"); //chemin absolut
+
+            //Lister le contenu d'un répertoire:
+            string[] files = Directory.GetFiles(@"c:\dossier");
+            foreach (var item in files)
+            {
+                Console.WriteLine(item);
+            }
+
+            Console.WriteLine("============ 2ème surcharge ==============");
+
+            foreach (var item in Directory.GetFiles(@"c:\dossier", "*.txt"))
+            {
+                Console.WriteLine(item);
+            }
+
+            Console.WriteLine("============ 3ème surcharge ==============");
+
+            foreach (var item in Directory.GetFiles(@"c:\dossier", "*.txt", SearchOption.AllDirectories))
+            {
+                Console.WriteLine(item);
+            }
+
+            Console.WriteLine("************ Classes File et FileInfo:");
+
+            //File:
+            File.Copy(@"c:\dossier\notes.txt", @"c:\dossier\copie.txt",true);
+
+            //FileInfo:
+            FileInfo info = new FileInfo(@"c:\dossier\notes.txt");
+
+            Console.WriteLine("Date du dernier accès: "+info.LastAccessTime);
+            Console.WriteLine("Date de la dernière modif accès: "+info.LastWriteTime);
+            Console.WriteLine("Extension: "+info.Extension);
+            Console.WriteLine("Taille en octets: "+info.Length);
+
+
+            Console.WriteLine(">>>>> Lecture/Ecriture fichiers:");
+
+            /*
+             * Stream (flux): est une sorte de canal intermédiaire entre une source et une destination
+             * 
+             * 1- Charger le fichier dans flux (lecture/écriture)
+             * 2- Excéuter les opérations (lecture/écriture)
+             * 3- Fermer le flux
+             * 
+             */
+
+            //Lecture d'un fichier:
+
+            StreamReader sr = new StreamReader(@"c:\dossier\notes.txt"); //
+            string contenu = sr.ReadToEnd();
+            sr.Close();
+
+            Console.WriteLine(contenu);
+
+            //Ecriture dans un fichier:
+
+            StreamWriter sw = new StreamWriter(@"c:\dossier\demo.txt",true);
+            sw.Write("ceci est le contenu du fichier........");
+            sw.Close();
+
+            try
+            {
+                string content = Tools.LectureLigneFichier(@"c:\dossier\csharp.txt", 5);
+                Console.WriteLine(content);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine( e.Message);
+            }
+            
+
+            
+
+            #endregion
 
 
             // Maintenir la console active
@@ -831,6 +1283,57 @@ _ Afficher le salaire moyen des employés: tapez 3
         public static void MethodePolymorphique(MyClasse m)
         {
 
+        }
+
+        /// <summary>
+        /// Méthode qui génère une exception si x = 0
+        /// </summary>
+        /// <param name="x"></param>
+        /// <exception cref="Exception"></exception>
+        public static void Division(int x)
+        {
+            //Option1: la méthode gère sa propre exception
+            //try
+            //{
+            //    Console.WriteLine(10 / x);
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine( "Exception gérée par la méthode");
+            //}
+
+            //Option2: faire une remontée d'exception -> les appelants qui doivent gérer l'exception
+            if (x != 0)
+            {
+                Console.WriteLine(10 / x);
+            }
+            else
+            {
+                //déclencher une exception
+                //throw: mot cé qui permet de provoquer une exception
+                throw new Exception("Attention, tentative de division par 0");
+            }
+            
+        }
+        /// <summary>
+        /// Méthode qui permet de copier un fichier cource vers un fichier cible.
+        /// Si le fichier source est introuvable, la méthode génère une exception.
+        /// </summary>
+        /// <param name="cheminSource">chemin absolut du fichier à copier</param>
+        /// <param name="cheminCible">chemin de la copie</param>
+        /// <param name="ecraser">Le mettre à true, pour écraser la copie, si cette dernière existe</param>
+        /// <exception cref="Exception">Si chemin source invalide</exception>
+        public static void CopyFichier(string cheminSource, string cheminCible, bool ecraser)
+        {
+            if(File.Exists(cheminSource))
+            {
+                //copie
+                File.Copy(cheminSource, cheminCible, ecraser);
+            }
+            else
+            {
+                throw new Exception("Chemin invalide.....");
+            }
         }
     }
 }

@@ -25,7 +25,8 @@ namespace ProjetDLL.ConceptsObjets.Encapsulation
                 }
                 else
                 {
-                    Console.WriteLine("Numéro doit contenir au minimum 6 char");
+                    //Console.WriteLine("Numéro doit contenir au minimum 6 char");
+                    throw new Exception("Numéro doit contenir au minimum 6 char");
                 }
                 
             }
@@ -71,7 +72,8 @@ namespace ProjetDLL.ConceptsObjets.Encapsulation
         {
             if (Solde < montant)
             {
-                Console.WriteLine("Solde insuffisant....");
+                //Console.WriteLine("Solde insuffisant....");
+                throw new Exception("Solde insuffisant......");
             }
             else
             {
