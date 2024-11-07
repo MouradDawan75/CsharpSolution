@@ -49,22 +49,31 @@ namespace ProjetDLL
         /// <exception cref="Exception">Si chemin invalide, une exception est générée</exception>
         public static void EcritureFichier(string chemin, string contenu, bool modeAjout)
         {
-            if(File.Exists(chemin) )
+            if (File.Exists(chemin))
             {
-                StreamWriter sw = new StreamWriter(chemin, modeAjout);
-
-                if (modeAjout == true)
-                {
-                    contenu = "\n" + contenu;
-                }
-
-                sw.Write(contenu);
-                sw.Close();
+                contenu = InsererContenu(chemin, contenu, modeAjout);
             }
             else
             {
-                throw new Exception("Chemin invalide......");
+                // throw new Exception("Chemin invalide......");
+                File.Create(chemin).Close();
+                contenu = InsererContenu(chemin, contenu, modeAjout);
+
             }
+        }
+
+        private static string InsererContenu(string chemin, string contenu, bool modeAjout)
+        {
+            StreamWriter sw = new StreamWriter(chemin, modeAjout);
+
+            if (modeAjout == true)
+            {
+                contenu = "\n" + contenu;
+            }
+
+            sw.Write(contenu);
+            sw.Close();
+            return contenu;
         }
 
         //Méthode de lecture d'une ligne particulière d'un fichier

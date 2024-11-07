@@ -1236,9 +1236,21 @@ _ Afficher le salaire moyen des employés: tapez 3
             {
                 Console.WriteLine( e.Message);
             }
-            
 
-            
+
+
+
+            #endregion
+
+            #region "Bases de données"
+
+            /*
+             * Une application .net utilise un connecteur (driver - dll - ADO.Net) pour interagir avec une base de données
+             * Pour une BD SqlServer, la DLL est fournie (System.Data). Pour un autre type de base de données, on doit téléchagrer
+             * la DLL via Nuget -> clic droit sur le projet -> Gérer les packages Nuget -> installer la DLL 
+             * 
+             * 
+             */
 
             #endregion
 
