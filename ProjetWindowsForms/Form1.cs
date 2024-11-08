@@ -69,6 +69,8 @@ namespace ProjetWindowsForms
             {
                 listBox1.Items.Add(produit);
             }
+
+           
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -149,6 +151,57 @@ namespace ProjetWindowsForms
             Remplir(XmlTool.ImportXml(@"c:\dossier\lignes.xml"));
             Clear();
             
+        }
+
+        private void btnAjouterCsv_Click(object sender, EventArgs e)
+        {
+            Ligne l = new Ligne(txtDescriptionCsv.Text, txtNomClientCsv.Text, txtAdresseClientCsv.Text, txtCoueurCsv.Text);
+            List<Ligne> lst = CsvTool.ImportCsv(@"c:\dossier\lignes.csv");
+            lst.Add(l);
+            CsvTool.ExportCsv(@"c:\dossier\lignes.csv", lst);
+            RemplirListBoxCsv(lst);
+        }
+
+        private void RemplirListBoxCsv(List<Ligne> lst)
+        {
+            listBox3.Items.Clear();
+            foreach (var item in lst)
+            {
+                listBox3.Items.Add(item);
+            }
+
+            ClearChampsCsv();
+        }
+
+        private void ClearChampsCsv()
+        {
+            txtDescriptionCsv.Clear();
+            txtNomClientCsv.Clear();
+            txtAdresseClientCsv.Clear();
+            txtCoueurCsv.Clear();
+            btnAjouterCsv.Text = "Ajouter";
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            List<Ligne> lignes = new List<Ligne>();
+            lignes.Add(new Ligne("l1", "nc1", "adc1", "c1"));
+            lignes.Add(new Ligne("l2", "nc2", "adc2", "c2"));
+            lignes.Add(new Ligne("l3", "nc3", "adc3", "c3"));
+            CsvTool.ExportCsv(@"c:\dossier\lignes.csv", lignes);
+        }
+
+        private void btnLectureCSV_Click(object sender, EventArgs e)
+        {
+            //Remplir la listeBox3 à partir du fichier CSV
+            //listBox3.Items.Clear();
+
+            //foreach (var item in CsvTool.ImportCsv(@"c:\dossier\lignes.csv"))
+            //{
+            //    listBox3.Items.Add(item);   
+            //} 
+
+            RemplirListBoxCsv(CsvTool.ImportCsv(@"c:\dossier\lignes.csv"));
         }
     }
 }
