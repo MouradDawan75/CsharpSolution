@@ -76,6 +76,8 @@
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Fabricant.cs" />
+    <Compile Include="Models\Ligne.cs" />
     <Compile Include="Models\Produit.cs" />
     <Compile Include="Models\Utilisateur.cs" />
     <Compile Include="Program.cs" />
@@ -83,6 +85,8 @@
     <Compile Include="Repository\ConnexionBDD.cs" />
     <Compile Include="Repository\ProduitRepository.cs" />
     <Compile Include="Repository\UtilisateurRepository.cs" />
+    <Compile Include="Service\CsvTool.cs" />
+    <Compile Include="Service\XmlTool.cs" />
     <Compile Include="UtilisateurForm.cs">
       <SubType>Form</SubType>
     </Compile>

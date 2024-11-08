@@ -34,7 +34,7 @@ namespace ProjetWindowsForms.Models
 
         public override string ToString()
         {
-            return $"Decription: {Description} Prix: {Prix} Quantité: {Quantite}";
+            return $"Description: {Description} Prix: {Prix} Quantité: {Quantite}";
         }
         /*
          * Pour chaque classe objet (définie dans Models): on crée une table

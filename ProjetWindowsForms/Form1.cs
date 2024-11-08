@@ -1,5 +1,7 @@
-﻿using ProjetWindowsForms.Models;
+﻿using ProjetDLL;
+using ProjetWindowsForms.Models;
 using ProjetWindowsForms.Repository;
+using ProjetWindowsForms.Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -61,6 +63,12 @@ namespace ProjetWindowsForms
             //string heure = dt.ToLongTimeString();
             //lblHeure.Text = heure;
             //timer1.Start();
+
+            List<Produit> lst = ProduitRepository.GetAll();
+            foreach (Produit produit in lst)
+            {
+                listBox1.Items.Add(produit);
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -95,6 +103,52 @@ namespace ProjetWindowsForms
             LoginForm loginForm = this.Owner as LoginForm;
             loginForm.Visible = true;
             this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            List<Ligne> lignes = new List<Ligne>();
+            lignes.Add(new Ligne("l1", "nc1", "adc1", "c1"));
+            lignes.Add(new Ligne("l2", "nc2", "adc2", "c2"));
+            lignes.Add(new Ligne("l3", "nc3", "adc3", "c3"));
+            XmlTool.ExportXml(@"c:\dossier\lignes.xml", lignes);
+        }
+
+        private void Remplir(List<Ligne> lignes)
+        {
+            listBox2.Items.Clear();
+            foreach (var ligne in lignes)
+            {
+                listBox2.Items.Add(ligne);
+            }
+        }
+
+        private void Clear()
+        {
+            txtAdresse.Clear();
+            txtCouleur.Clear();
+            txtNom.Clear();
+            txtDescription.Clear();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            List<Ligne> lignes = XmlTool.ImportXml(@"c:\dossier\lignes.xml");
+            foreach(var ligne in lignes)
+            {
+                listBox2.Items.Add(ligne);
+            }
+        }
+
+        private void btnAjouter_Click(object sender, EventArgs e)
+        {
+            Ligne l = new Ligne(txtDescription.Text, txtNom.Text, txtAdresse.Text, txtCouleur.Text);
+            List<Ligne> lignes = XmlTool.ImportXml(@"c:\dossier\lignes.xml");
+            lignes.Add(l);
+            XmlTool.ExportXml(@"c:\dossier\lignes.xml", lignes);
+            Remplir(XmlTool.ImportXml(@"c:\dossier\lignes.xml"));
+            Clear();
+            
         }
     }
 }
